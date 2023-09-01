@@ -1,0 +1,33 @@
+spring.application.name: eureka-zuul
+
+server.port: 8764
+
+eureka.client.registerWithEureka: true
+eureka.client.fetchRegistry: true
+eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+
+# 忽略所有的服务
+zuul.ignoredServices: '*'
+# 路径为/consumer1/**的地址都跳转到eureka-client1
+zuul.routes.eureka-client1: /consumer1/**
+zuul.routes.eureka-client2: /consumer2/**
+## add a prefix to all mappings
+#zuul.prefix: /zuul
+## 是否从请求中剥离代理前缀
+#zuul.stripPrefix: false
+## 是否剥离users服务的代理前缀
+#zuul.routes.users.stripPrefix: false
+# Uploading Files through Zuul
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+ribbon.ConnectTimeout: 3000
+ribbon.ReadTimeout: 60000
+# Query String Encoding
+zuul.forceOriginalQueryStringEncoding: true
+# use okhttp3.OkHttpClient
+ribbon.okhttp.enabled: true
+
+# LOGGING
+logging.level.root: WARN
+logging.level.org.springframework.web: DEBUG
+logging.level.com.eureka.zuul: DEBUG
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
