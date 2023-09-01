@@ -1,0 +1,37 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: soul-bootstrap
+#   cloud:
+#    nacos:
+#       discovery:
+#          server-addr: 127.0.0.1:8848
+
+management:
+  health:
+    defaults:
+      enabled: false
+
+soul :
+  sync:
+    websocket :
+      urls: ws://localhost:9095/websocket  # //设置成你的soul-admin地址
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+server:
+  port: 9195
+  address: 0.0.0.0
+
+
+
+
+
+
+

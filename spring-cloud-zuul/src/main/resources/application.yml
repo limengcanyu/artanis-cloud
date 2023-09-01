@@ -1,0 +1,80 @@
+server.port: 8790
+spring.application.name: spring-cloud-zuul
+
+#eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+spring.cloud.nacos.discovery.server-addr: 127.0.0.1:8848
+
+# LOGGING
+logging.level.com.spring.cloud.zuul: DEBUG
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+
+management.endpoint.shutdown.enabled: true
+management.endpoints.web.exposure.include: "*"
+# A POST to /routes forces a refresh of the existing routes (for example, when there have been changes in the service catalog).
+# You can disable this endpoint by setting endpoints.routes.enabled to false.
+# the routes should respond automatically to changes in the service catalog,
+# but the POST to /routes is a way to force the change to happen immediately.
+#endpoints.routes.enabled: false
+
+# 静态方式配置网关
+# individual config
+#zuul.routes.microservice1.id: microservice1
+#zuul.routes.microservice1.path: /microservice1/**
+#zuul.routes.microservice1.serviceId: spring-cloud-microservice1
+#zuul.routes.microservice1.prefix: /microservice1
+#zuul.routes.microservice1.stripPrefix: true
+#hystrix.command.microservice1.execution.isolation.thread.timeoutInMilliseconds: 60000
+#microservice1.ribbon.ConnectTimeout: 1000
+#microservice1.ribbon.ReadTimeout: 3000
+#microservice1.ribbon.SocketTimeout: 3000
+#microservice1.ribbon.MaxTotalHttpConnections: 500
+#microservice1.ribbon.MaxConnectionsPerHost: 100
+
+#zuul.routes.microservice2.id: microservice1
+#zuul.routes.microservice2.path: /microservice2/**
+#zuul.routes.microservice2.serviceId: spring-cloud-microservice2
+#zuul.routes.microservice2.prefix: /microservice1
+#zuul.routes.microservice2.stripPrefix: true
+#hystrix.command.microservice2.execution.isolation.thread.timeoutInMilliseconds: 60000
+#microservice2.ribbon.ConnectTimeout: 1000
+#microservice2.ribbon.ReadTimeout: 3000
+#microservice2.ribbon.SocketTimeout: 3000
+#microservice2.ribbon.MaxTotalHttpConnections: 500
+#microservice2.ribbon.MaxConnectionsPerHost: 100
+
+# 设置微服务ID为 spring-cloud-microservice1 的路由 path, stripPrefix 默认为 true
+# route id: spring-cloud-microservice1
+zuul.routes.spring-cloud-microservice1: /microservice1/**
+zuul.routes.spring-cloud-microservice2: /microservice2/**
+zuul.routes.spring-cloud-fileservice: /fileservice/**
+
+# global config
+# zuul.stripPrefix only applies to the prefix set in zuul.prefix.
+# It does not have any effect on prefixes defined within a given route’s path.
+zuul.stripPrefix: false
+#zuul.prefix: ""
+# have the Ribbon client automatically retry failed requests
+zuul.retryable: false
+# By default, the X-Forwarded-Host header is added to the forwarded requests. To turn it off, set zuul.addProxyHeaders = false.
+zuul.addProxyHeaders: false
+## specify specific patterns to ignore
+#zuul.ignoredPatterns: /**/echo/**
+## ignore /microservice1/echo, don't ignore /microservice2/echo
+#zuul.ignoredPatterns: /microservice1/echo/**
+
+# Uploading Files through Zuul
+#zuul.servletPath: "/zuul"
+#  If the proxy route takes you through a Ribbon load balancer, extremely large files also require elevated timeout settings
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 126000
+#ribbon.ConnectTimeout: 3000
+#ribbon.ReadTimeout: 60000
+#ribbon.SocketTimeout: 60000
+
+# sentinel dashboard
+spring.cloud.sentinel.transport.port: 8719
+spring.cloud.sentinel.transport.dashboard: localhost:8081
+
+# Sentinel 网关限流
+spring.cloud.sentinel.filter.enabled: false
+
+#spring.main.allow-bean-definition-overriding: true

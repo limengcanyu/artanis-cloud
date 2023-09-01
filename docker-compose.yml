@@ -1,0 +1,22 @@
+version: '3'
+services:
+  spring-cloud-zipkin-server:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+  spring-cloud-sleuth-zipkin1:
+    build: ./spring-cloud-sleuth-zipkin1
+    image: rock/spring-cloud-sleuth-zipkin1
+    ports:
+      - "8091:8091"
+    environment:
+      SPRING_ZIPKIN_BASE-URL: http://zipkin-server:9411
+      MICROSERVICE_CLIENT_URL: http://spring-cloud-sleuth-zipkin2:8092
+  spring-cloud-sleuth-zipkin2:
+    build: ./spring-cloud-sleuth-zipkin2
+    image: rock/spring-cloud-sleuth-zipkin2
+    ports:
+      - "8092:8092"
+    environment:
+      SPRING_ZIPKIN_BASE-URL: http://zipkin-server:9411
+      MICROSERVICE_CLIENT_URL: http://spring-cloud-sleuth-zipkin1:8091

@@ -1,0 +1,47 @@
+
+spring:
+  cloud:
+    gateway:
+      # 配置方式配置静态路由，适合路由比较少的项目
+      routes:
+#        # 以 /security 开头的调用认证微服务，例如 http://localhost:8780/security/auth/register，后面的 /auth/register 传递给认证微服务
+#        - id: security_route
+#          uri: lb://spring-cloud-security
+#          predicates:
+#            - Path=/security/**
+#          filters:
+#            - StripPrefix=1
+#          # 每个路由的超时配置
+#          metadata:
+#            response-timeout: 200
+#            connect-timeout: 200
+        - id: microservice1_route
+          uri: lb://spring-cloud-microservice1
+          predicates:
+            - Path=/microservice1/**
+          # StripPrefix: 接受一个非负整数，对应的具体实现是StripPrefixGatewayFilterFactory，做用是去掉前缀，整数对应层数。
+          # 在本例中访问的 /microservice1/echo/str，网关服务向后转发请求的时候会去掉 /microservice1，
+          # microservice1 收到的请求是：/echo/str。
+          filters:
+            - StripPrefix=1
+#        - id: microservice2_route
+#          uri: lb://spring-cloud-microservice2
+#          predicates:
+#            - Path=/microservice2/**
+#          filters:
+#            - StripPrefix=1
+#        # 将gateway的请求通过Zuul再转发到对应的微服务，Zuul的拦截器不起作用
+#        - id: zuul_route
+#          uri: lb://spring-cloud-zuul
+#          predicates:
+#            - Path=/*/**
+##          filters:
+##            - StripPrefix=1
+      # CORS Configuration
+      globalcors:
+        corsConfigurations:
+          '[/*/**]':
+            # 允许所有网址的请求跨域
+            allowedOrigins: "*"
+            # 允许所有的请求跨域
+            allowedMethods: "*"

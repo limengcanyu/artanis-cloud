@@ -1,0 +1,11 @@
+server.port: 8890
+spring.application.name: spring-cloud-stream-kafka-consumer
+
+#eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+
+# Kafka Binder Properties
+spring.cloud.stream.kafka.binder.brokers: 192.168.31.131:9092
+
+## Common Binding Properties
+# 定义channel(topic)的消费者组 channel name: topic
+spring.cloud.stream.bindings.topic.group: spring-cloud-stream-kafka-consumer

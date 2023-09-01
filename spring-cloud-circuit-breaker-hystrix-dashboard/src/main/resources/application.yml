@@ -1,0 +1,10 @@
+#spring.profiles.active: commons
+
+spring.application.name: spring-cloud-circuit-breaker-hystrix-dashboard
+server.port: 8200
+
+eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+
+# LOGGING
+logging.level.com.spring.cloud.circuit.breaker.hystrix.dashboard: DEBUG
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}

@@ -1,0 +1,47 @@
+#spring.profiles.active: commons
+
+spring.application.name: spring-cloud-stream-rabbitmq-producer
+
+# LOGGING
+logging.level.com.spring.cloud: DEBUG
+
+spring.rabbitmq.addresses: amqp://admin:admin@192.168.81.129:5672
+
+# specify which functional bean to bind to the external destination(s) exposed by the bindings
+# 组合处理，单个消息应用到|分隔的多个函数
+#spring.cloud.function.definition: uppercase|stringConsumer
+
+## 当个函数处理，中间用;分隔
+#spring.cloud.function.definition: stringSupplier;uppercase;stringConsumer
+## stringSupplier;uppercase;stringConsumer
+## stringSupplier 输出消息
+## uppercase 接收 stringSupplier 输出的消息，处理再输出消息
+## stringConsumer 接收 uppercase 输出的消息，消费
+#spring.cloud.stream.bindings.stringSupplier-out-0.destination: stringSupplier-topic
+#
+#spring.cloud.stream.bindings.uppercase-in-0.destination: stringSupplier-topic
+#spring.cloud.stream.bindings.uppercase-in-0.group: stringSupplier-group
+#spring.cloud.stream.bindings.uppercase-out-0.destination: uppercase-topic
+#
+#spring.cloud.stream.bindings.stringConsumer-in-0.destination: uppercase-topic
+#spring.cloud.stream.bindings.stringConsumer-in-0.group: stringConsumer-group
+
+
+spring.cloud.function.definition: inputCase;uppercase;lowerCase;stringConsumer
+# stringSupplier;uppercase;stringConsumer
+# stringSupplier 输出消息
+# uppercase 接收 stringSupplier 输出的消息，处理再输出消息
+# stringConsumer 接收 uppercase 输出的消息，消费
+spring.cloud.stream.bindings.inputCase-out-0.destination: inputCase-out-topic
+
+spring.cloud.stream.bindings.lowerCase-in-0.destination: inputCase-out-topic
+spring.cloud.stream.bindings.lowerCase-in-0.group: lowerCase-group
+spring.cloud.stream.bindings.lowerCase-out-0.destination: lowerCase-out-topic
+
+spring.cloud.stream.bindings.uppercase-in-0.destination: lowerCase-out-topic
+spring.cloud.stream.bindings.uppercase-in-0.group: uppercase-group
+spring.cloud.stream.bindings.uppercase-out-0.destination: uppercase-out-topic
+
+spring.cloud.stream.bindings.stringConsumer-in-0.destination: uppercase-out-topic
+spring.cloud.stream.bindings.stringConsumer-in-0.group: stringConsumer-group
+

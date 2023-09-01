@@ -1,0 +1,2 @@
+# To ensure that your application name is properly displayed in Zipkin, set the spring.application.name property in bootstrap.yml.
+spring.application.name: spring-cloud-gateway-sentinel

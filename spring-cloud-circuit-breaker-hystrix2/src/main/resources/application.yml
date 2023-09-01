@@ -1,0 +1,54 @@
+spring.application.name: spring-cloud-circuit-breaker-hystrix2
+server.port: 8300
+
+eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+
+# LOGGING
+logging.level.com.spring.cloud: DEBUG
+logging.level.project.spring-cloud-circuit-breaker-hystrix1.StoreClient: DEBUG
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+
+#management.endpoints.web.exposure.include: hystrix.stream
+management.endpoints.web.exposure.include: "*"
+
+# ribbon 超时设置
+# Enables the use of Eureka with Ribbon.
+# Setting the ribbon.eureka.enabled property to false explicitly disables the use of Eureka in Ribbon
+ribbon.eureka.enabled: false
+## Causes RibbonLoadBalancerClient to be used by default.
+spring.cloud.loadbalancer.ribbon.enabled: false
+
+# ribbon Timeout
+# configure some bits of a Ribbon client by using external properties in <client>.ribbon.*
+# 调用的服务耗时需小于 连接超时 + 读取超时，否则会Feign调用超时
+spring-cloud-circuit-breaker-hystrix1.ribbon.ConnectTimeout: 1000
+spring-cloud-circuit-breaker-hystrix1.ribbon.ReadTimeout: 5000
+
+# feign Timeout
+feign.client.config.default.connectTimeout: 1000
+feign.client.config.default.readTimeout: 5000
+feign.client.config.default.loggerLevel: basic
+
+# Disabling Spring Cloud Circuit Breaker Hystrix
+#spring.cloud.circuitbreaker.hystrix.enabled: false
+
+# To disable Hystrix in Feign
+feign.hystrix.enabled: true
+# 属性参考地址 https://github.com/Netflix/Hystrix/wiki/Configuration#execution.isolation.strategy
+
+# THREAD — it executes on a separate thread and concurrent requests are limited by the number of threads in the thread-pool
+hystrix.command.default.execution.isolation.strategy: THREAD
+# 是否开始超时熔断，如果为false，则熔断机制只在服务不可用时开启（spring-cloud-starter-openfeign中的HystrixCommandProperties默认为true）
+hystrix.command.default.execution.timeout.enabled: true
+# 配置属性方式设置熔断超时时间（spring-cloud-starter-openfeign中的HystrixCommandProperties默认为1000毫秒），覆盖编码方式配置
+# feign超时时间 1000 + 5000 = 6000 毫秒，hystrix超时时间大于feign超时时间则不发生熔断，小于则发生熔断
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 6000
+hystrix.command.default.execution.isolation.thread.interruptOnTimeout: true
+hystrix.command.default.execution.isolation.thread.interruptOnCancel: false
+
+## SEMAPHORE — it executes on the calling thread and concurrent requests are limited by the semaphore count
+#hystrix.command.default.execution.isolation.strategy: SEMAPHORE
+#hystrix.command.default.execution.isolation.semaphore.maxConcurrentRequests: 10
+
+
+

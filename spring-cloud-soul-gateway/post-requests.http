@@ -1,0 +1,9 @@
+### Send POST request with json body
+POST http://localhost:9195/http/order/save
+Content-Type: application/json
+
+{
+  "id": 123,
+  "name": "test"
+}
+

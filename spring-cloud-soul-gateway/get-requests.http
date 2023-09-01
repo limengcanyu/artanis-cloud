@@ -1,0 +1,3 @@
+### GET request with parameter
+GET http://localhost:9195/springcloud/order/findById?id=123
+Accept: application/json

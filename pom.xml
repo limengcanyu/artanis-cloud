@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.spring.cloud</groupId>
+    <artifactId>spring-cloud-alice</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>spring-boot-admin-eureka-client1</module>
+        <module>spring-boot-admin-eureka-client2</module>
+        <module>spring-boot-admin-eureka-server</module>
+        <module>spring-boot-admin-nacos-client1</module>
+        <module>spring-boot-admin-nacos-client2</module>
+        <module>spring-boot-admin-nacos-server</module>
+        <module>spring-cloud-circuit-breaker-hystrix1</module>
+        <module>spring-cloud-circuit-breaker-hystrix2</module>
+        <module>spring-cloud-circuit-breaker-hystrix-dashboard</module>
+        <module>spring-cloud-circuit-breaker-hystrix-turbine</module>
+        <module>spring-cloud-circuit-breaker-resilience4j1</module>
+        <module>spring-cloud-circuit-breaker-resilience4j2</module>
+        <module>spring-cloud-config-client</module>
+        <module>spring-cloud-config-server</module>
+        <module>spring-cloud-eureka-microservice1</module>
+        <module>spring-cloud-eureka-microservice2</module>
+        <module>spring-cloud-eureka-microservice3</module>
+        <module>spring-cloud-eureka-server</module>
+        <module>spring-cloud-gateway</module>
+        <module>spring-cloud-gateway-dynamicroute</module>
+        <module>spring-cloud-gateway-resilience4j</module>
+        <module>spring-cloud-gateway-sentinel</module>
+        <module>spring-cloud-nacos-config-client</module>
+        <module>spring-cloud-nacos-microservice1</module>
+        <module>spring-cloud-nacos-microservice2</module>
+        <module>spring-cloud-nacos-microservice3</module>
+        <module>spring-cloud-nacos-microservice4</module>
+        <module>spring-cloud-sleuth-skywalking1</module>
+        <module>spring-cloud-sleuth-skywalking2</module>
+        <module>spring-cloud-sleuth-skywalking3</module>
+        <module>spring-cloud-sleuth-skywalking4</module>
+        <module>spring-cloud-sleuth-zipkin1</module>
+        <module>spring-cloud-sleuth-zipkin2</module>
+        <module>spring-cloud-sleuth-zipkin3</module>
+        <module>spring-cloud-sleuth-zipkin4</module>
+        <module>spring-cloud-soul-gateway</module>
+        <module>spring-cloud-soul-microservice1</module>
+        <module>spring-cloud-stream-kafka-consumer</module>
+        <module>spring-cloud-stream-kafka-producer</module>
+        <module>spring-cloud-stream-kafka-streams-consumer</module>
+        <module>spring-cloud-stream-kafka-streams-producer</module>
+        <module>spring-cloud-stream-rabbitmq</module>
+        <module>spring-cloud-stream-rabbitmq-consumer</module>
+        <module>spring-cloud-stream-rabbitmq-producer</module>
+        <module>spring-cloud-zuul</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <java.version>1.8</java.version>
+
+        <zipkin.server.version>2.12.9</zipkin.server.version>
+        <zipkin.autoconfigure.ui.version>2.12.9</zipkin.autoconfigure.ui.version>
+
+        <lombok.version>1.18.16</lombok.version>
+        <fastjson.version>1.2.75</fastjson.version>
+        <gson.version>2.8.6</gson.version>
+
+        <mysql.connector.java.version>8.0.19</mysql.connector.java.version>
+        <druid.spring.boot.starter.version>1.1.21</druid.spring.boot.starter.version>
+
+        <spring.cloud.alibaba.seata.version>2.2.0.RELEASE</spring.cloud.alibaba.seata.version>
+        <seata.all.version>1.1.0</seata.all.version>
+
+        <spring.boot.admin.starter.server.version>2.2.2</spring.boot.admin.starter.server.version>
+
+        <commons.pool2.version>2.7.0</commons.pool2.version>
+
+        <jjwt.api.version>0.10.7</jjwt.api.version>
+        <jjwt.impl.version>0.10.7</jjwt.impl.version>
+        <jjwt.jackson.version>0.10.7</jjwt.jackson.version>
+
+        <token.bucket.version>1.7</token.bucket.version>
+
+        <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
+        <springfox.swagger.ui.version>2.9.2</springfox.swagger.ui.version>
+
+        <jasypt.spring.boot.starter.version>2.1.2</jasypt.spring.boot.starter.version>
+        <mybatis.plus.boot.starter.version>3.3.1</mybatis.plus.boot.starter.version>
+        <mybatis.plus.generator.version>3.3.1</mybatis.plus.generator.version>
+        <velocity.engine.core.version>2.2</velocity.engine.core.version>
+        <p6spy.version>3.9.0</p6spy.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR11</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.4.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.alibaba.cloud/spring-cloud-alibaba-dependencies -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.2.5.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.4.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

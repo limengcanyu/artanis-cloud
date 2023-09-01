@@ -1,0 +1,29 @@
+#spring.profiles.active: commons
+
+server.port: 8700
+spring.application.name: spring-cloud-eureka-microservice1
+
+eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+
+# LOGGING
+logging.level.com.spring.cloud: DEBUG
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+
+## find Zipkin through service discovery
+#spring.zipkin.baseUrl: https://spring-cloud-zipkin-server/
+#spring.sleuth.sampler.probability: 1
+
+# Ribbon load-balancer is now in maintenance mode, disabling Ribbon with Eureka Server and Client starters,
+# using the Spring Cloud LoadBalancer
+spring.cloud.loadbalancer.ribbon.enabled: false
+
+# 发现客户端注册之后，Eureka默认认为是可用状态，不再检查发现客户端是否可用，开启发现客户端心跳检查，将发现客户端状态定时发送给Eureka
+eureka.client.healthcheck.enabled: true
+
+# change periodic heartbeat to the registry, default duration of 30 seconds
+eureka.instance.leaseRenewalIntervalInSeconds: 10
+
+# web方式公开所有端点
+management.endpoints.web.exposure.include: "*"
+management.endpoint.health.show-details: always
+
