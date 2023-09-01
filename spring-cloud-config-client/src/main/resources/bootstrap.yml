@@ -1,0 +1,20 @@
+# 该属性要放此处，先于application.yml中的属性加载
+spring.application.name: spring-cloud-config-client
+
+# config client
+# 配置Client启动后，会绑定到配置Server，并使用远程属性初始化Spring环境，因此配置需放在 bootstrap.yml 中，放在 application.yml 中不起作用
+# 使用服务发现查找配置Server
+spring.cloud.config.discovery.enabled: true
+# 配置 Server 的 服务ID，即spring.application.name
+spring.cloud.config.discovery.serviceId: spring-cloud-config-server
+## 获取哪个服务的配置
+#spring.cloud.config.name: spring-cloud-config-client
+# 获取哪个环境的配置
+spring.cloud.config.profile: dev
+# 获取哪个分支的配置，可以多个分支
+spring.cloud.config.label: master,develop
+# Config Client Fail Fast：不能连接配置Server时失败，抛异常
+spring.cloud.config.fail-fast: true
+# Configuring Timeouts
+spring.cloud.config.request-read-timeout: 3000
+spring.cloud.config.request-connect-timeout: 3000

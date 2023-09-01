@@ -1,0 +1,8 @@
+#spring.profiles.active: commons
+
+spring.application.name: spring-cloud-stream-rabbitmq-consumer
+
+# LOGGING
+logging.level.com.spring.cloud: DEBUG
+
+spring.rabbitmq.addresses: amqp://admin:admin@192.168.81.129:5672

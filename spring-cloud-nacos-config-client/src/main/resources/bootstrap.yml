@@ -1,0 +1,53 @@
+# To ensure that your application name is properly displayed in Zipkin, set the spring.application.name property in bootstrap.yml.
+spring.application.name: spring-cloud-nacos-config-client
+server.port: 8800
+
+# 虽然说，Bootstrap Context 和 Application Context 做了这么多隔离，但是它们有一点是共享的，那就是 Environment。在 Spring 中，我们通过 Environment 获取属性配置，例如说 spring.application.name 对应的值是多少。
+#
+#了解完这些之后，我们把它们串联在一起去思考一下，Bootstrap Context 的目的究竟是什么呢？通过 Bootstrap Context 的优先初始化，将配置加载到 Environment 中，提供给后面的 Application Context 使用。
+#
+#举个贼重要的例子，稍后我们会在 bootstrap.yaml 添加 Spring Cloud Alibaba Nacos Config 相关的配置，这样 Bootstrap Context 在初始化时，通过 NacosConfigBootstrapConfiguration 创建 Nacos 相关的 Bean，然后实现从 Nacos 配置中心加载配置到 Environment 中。
+#
+#如果我们把 Spring Cloud Alibaba Nacos Config 相关的配置添加在 application.yaml 中，那么可能无法保证 Nacos 相关的 Bean 被最先初始化，完成从 Nacos 获取配置，从而影响创建的 Bean。
+
+# 使用Nacos配置
+# Nacos 服务器地址
+spring.cloud.nacos.discovery.server-addr: 127.0.0.1:8848
+spring.cloud.nacos.config.server-addr: 127.0.0.1:8848
+# 使用的 Nacos 的命名空间，默认为 null
+#pring.cloud.nacos.config.namespace:
+# 使用的 Nacos 配置分组，默认为 DEFAULT_GROUP
+spring.cloud.nacos.config.group: DEFAULT_GROUP
+# 使用的 Nacos 配置集的 dataId，默认为 spring.application.name
+#spring.cloud.nacos.config.name:
+# 使用的 Nacos 配置集的 dataId 的文件拓展名，同时也是 Nacos 配置集的配置格式，默认为 properties
+spring.cloud.nacos.config.file-extension: yaml
+
+
+# nacos配置中心配置
+#order:
+#  id: order_001
+#  # password: ENC(2F34BZlow/Ots+XhwRGjfKUohhmPb95xxZ8NDGu6LGE=)
+#  password: viZXzfXv673GQHcsjRZy8p8R9qQmCzzFsU3qXXkBECk=
+#  #password: 2F34BZlow/Ots+XhwRGjfKUohhmPb95xxZ8NDGu6LGE=
+#
+#product:
+#  id: product_001
+#
+#spring.datasource.type: com.alibaba.druid.pool.DruidDataSource
+#
+#spring.datasource.driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+#spring.datasource.url: jdbc:p6spy:mysql://localhost:3306/artanis?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8
+#
+#spring.datasource.username: root
+#spring.datasource.password: JEhlPX06gycwiV9w3/GXHggHFj/Mw57pESSYgGc7BRM=
+#
+#
+#useLocalCache: false
+#
+#jasypt:
+#  encryptor:
+#    # 加密算法
+#    algorithm: PBEWITHMD5ANDDES
+#    # 加密密钥
+#    password: sdfsadfsdf

@@ -1,0 +1,13 @@
+server.port: 8761
+spring.application.name: spring-cloud-eureka-server
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8762/eureka/,http://localhost:8763/eureka/
+
+spring.cloud.loadbalancer.ribbon.enabled: false

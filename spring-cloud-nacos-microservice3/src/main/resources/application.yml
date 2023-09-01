@@ -1,0 +1,29 @@
+spring.application.name: spring-cloud-nacos-microservice3
+server.port: 8820
+
+spring.cloud.nacos.discovery.server-addr: 127.0.0.1:8848
+
+# LOGGING
+# Instead of logging the request in the handler explicitly, you could set
+logging.level.org.springframework.web.servlet.DispatcherServlet: DEBUG
+logging.level.com.spring.cloud: DEBUG
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+
+## find Zipkin through service discovery
+#spring.zipkin.baseUrl: https://spring-cloud-zipkin-server/
+#spring.sleuth.sampler.probability: 1
+
+# 发现客户端注册之后，Eureka默认认为是可用状态，不再检查发现客户端是否可用，开启发现客户端心跳检查，将发现客户端状态定时发送给Eureka
+eureka.client.healthcheck.enabled: true
+
+# sentinel dashboard
+spring.cloud.sentinel.transport.port: 8719
+spring.cloud.sentinel.transport.dashboard: localhost:8081
+
+# 打开 Sentinel 对 Feign 的支持
+feign.sentinel.enabled: true
+
+# web方式公开所有端点
+management.endpoints.web.exposure.include: "*"
+management.endpoint.health.show-details: always
+

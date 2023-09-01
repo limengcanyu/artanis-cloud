@@ -1,0 +1,4 @@
+### GET request with parameter
+GET localhost:8860/echoZipkin1/zipkin1
+Accept: application/json
+

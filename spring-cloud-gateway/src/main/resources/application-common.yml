@@ -1,0 +1,42 @@
+server.port: 8780
+
+eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+
+# LOGGING
+logging.level.com.spring.cloud.gateway: DEBUG
+#logging.level.org.springframework.cloud.gateway: TRACE
+#logging.level.org.springframework.http.server.reactive: TRACE
+#logging.level.org.springframework.web.reactive: TRACE
+#logging.level.org.springframework.boot.autoconfigure.web: TRACE
+#logging.level.reactor.netty: TRACE
+#logging.level.redisratelimiter: TRACE
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+
+# 关闭gateway
+#spring.cloud.gateway.enabled: false
+
+# Eureka Server中的服务名默认都是大写，该属性为true时，可以在路由配置中使用小写，例如：uri: lb://spring-cloud-microservice2
+spring.cloud.gateway.discovery.locator.lower-case-service-id: true
+# 开启服务发现，可从注册中心发现服务
+spring.cloud.gateway.discovery.locator.enabled: true
+
+# enable /gateway actuator endpoint
+management.endpoint.gateway.enabled: true # default value
+management.endpoints.web.exposure.include: gateway
+
+# ssl
+#server.ssl.enabled: true
+#server.ssl.key-alias: scg
+#server.ssl.key-store-password: scg1234
+#server.ssl.key-store: classpath:scg-keystore.p12
+#server.ssl.key-store-type: PKCS12
+
+# 配置 TLS 握手超时
+spring.cloud.gateway.httpclient.ssl.handshake-timeout: 10000
+spring.cloud.gateway.httpclient.ssl.close-notify-flush-timeout: 3000
+spring.cloud.gateway.httpclient.ssl.close-notify-read-timeout: 0
+
+# 全局 http 超时配置
+spring.cloud.gateway.httpclient.connect-timeout: 1000
+spring.cloud.gateway.httpclient.response-timeout: 5s
+

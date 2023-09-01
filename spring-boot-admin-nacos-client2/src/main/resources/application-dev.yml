@@ -1,0 +1,15 @@
+server.port: 8772
+spring.application.name: spring-boot-admin-nacos-client2
+
+# LOGGING
+logging.level.com.spring.boot: DEBUG
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+logging.file.name: /var/log/${spring.application.name}.log
+logging.pattern.file: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+
+spring.cloud.nacos.discovery.server-addr: 127.0.0.1:8848
+
+management.endpoints.web.exposure.include: "*"
+management.endpoint.health.show-details: ALWAYS
+
+
