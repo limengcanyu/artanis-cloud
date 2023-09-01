@@ -1,0 +1,9 @@
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: false
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-server-0.eureka-server-headless.default.svc.cluster.local:8761/eureka,http://eureka-server-1.eureka-server-headless.default.svc.cluster.local:8761/eureka,http://eureka-server-2.eureka-server-headless.default.svc.cluster.local:8761/eureka

@@ -1,0 +1,35 @@
+logging:
+  level:
+    com.spring.cloud: DEBUG
+
+# GatewayFilterConfig 中配置 modifyRequestBody 后，这里不用再配置
+spring:
+  application:
+    name: spring-cloud-gateway
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    sentinel:
+      transport:
+        port: 8719 # 启动一个 Http Server，与 Sentinel 控制台做交互
+        dashboard: localhost:8000
+      eager: true # 是否提前触发 Sentinel 初始化 默认 false
+      filter:
+        enabled: false # Enable to instance CommonFilter default true
+      scg:
+        # https://github.com/alibaba/spring-cloud-alibaba/wiki/Sentinel#spring-cloud-gateway-%E6%94%AF%E6%8C%81
+        fallback:
+          mode: "response" # Spring Cloud Gateway 流控处理逻辑 (选择 redirect or response)
+          response-body: "" # Spring Cloud Gateway 响应模式为 'response' 模式对应的响应内容
+          response-status: 429 # Spring Cloud Gateway 响应模式为 'response' 模式对应的响应码 默认 429
+          content-type: "application/json" # Spring Cloud Gateway 响应模式为 'response' 模式对应的 content-type
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

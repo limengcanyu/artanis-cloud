@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.spring.cloud.common.kafka.ReceiveMessageService,\
+com.spring.cloud.common.kafka.SendMessageService

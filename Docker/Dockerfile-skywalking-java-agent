@@ -1,0 +1,16 @@
+FROM openjdk:17.0.2-oracle as builder
+WORKDIR .
+ARG JAR_FILE=target/*execute.jar
+COPY ${JAR_FILE} application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
+
+# 使用skywalking-java-agent作为基础镜像
+FROM apache/skywalking-java-agent:8.11.0-java17
+WORKDIR .
+COPY --from=builder ./dependencies/ ./
+COPY --from=builder ./spring-boot-loader/ ./
+COPY --from=builder ./snapshot-dependencies/ ./
+COPY --from=builder ./application/ ./
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+# 无需启动参数上添加环境变量，自动适配
+#ENTRYPOINT ["sh", "-c", "java -DSW_AGENT_NAME=$SW_AGENT_NAME -DSW_AGENT_COLLECTOR_BACKEND_SERVICES=$SW_AGENT_COLLECTOR_BACKEND_SERVICES org.springframework.boot.loader.JarLauncher"]

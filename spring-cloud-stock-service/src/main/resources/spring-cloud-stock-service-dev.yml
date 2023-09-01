@@ -1,0 +1,11 @@
+current:
+  namespace: dev
+  env: dev
+
+server:
+  port: 8084
+
+user:
+  name: alice
+  age: 21
+

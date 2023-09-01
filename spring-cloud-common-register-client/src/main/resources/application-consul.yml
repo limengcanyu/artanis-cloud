@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    consul:
+      host: 192.168.136.135
+      port: 8507
+      # HTTP Health Check
+      discovery:
+        healthCheckPath: ${management.server.servlet.context-path}/actuator/health
+        healthCheckInterval: 15s
+        # Making the Consul Instance ID Unique
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

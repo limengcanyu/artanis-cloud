@@ -1,0 +1,57 @@
+﻿kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: eureka-config
+  namespace: default
+  annotations:
+    kubesphere.io/creator: admin
+data:
+  application-common.yml: |
+    server:
+      port: 8761
+
+    spring:
+      application:
+        name: spring-cloud-eureka-server
+
+    logging:
+      level:
+        com.spring.cloud: debug
+
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: "*"
+      endpoint:
+        health:
+          show-details: ALWAYS
+      metrics:
+        tags:
+          application: ${spring.application.name}
+  application-dev.yml: |
+    eureka:
+      instance:
+        hostname: localhost
+        prefer-ip-address: false
+      client:
+        registerWithEureka: false
+        fetchRegistry: false
+        serviceUrl:
+          defaultZone: http://localhost:8761/eureka/
+  application-k8s.yml: |
+    eureka:
+      instance:
+        # hostname: localhost
+        prefer-ip-address: false
+      client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+          defaultZone: http://eureka-server-0.eureka-server-headless.default.svc.cluster.local:8761/eureka,http://eureka-server-1.eureka-server-headless.default.svc.cluster.local:8761/eureka,http://eureka-server-2.eureka-server-headless.default.svc.cluster.local:8761/eureka
+  application.yml: |
+    spring:
+      profiles:
+        active: common,k8s
+    #    include: common,dev # 优先级比active高
+    #    active: k8s

@@ -1,0 +1,11 @@
+spring:
+  elasticsearch:
+    uris: "https://search.example.com:9200"
+    socket-timeout: "10s"
+    username: "user"
+    password: "secret"
+    restclient:
+      sniffer: # used to automatically discover nodes from a running Elasticsearch cluster
+        interval: "10m"
+        delay-after-failure: "30s"
+

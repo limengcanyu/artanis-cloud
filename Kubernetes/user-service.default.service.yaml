@@ -1,0 +1,28 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: user-service
+  namespace: default
+  labels:
+    app: user-service
+  annotations:
+    kubesphere.io/creator: admin
+spec:
+  ports:
+    - name: http-8083
+      protocol: TCP
+      port: 8083
+      targetPort: 8083
+      nodePort: 30604
+  selector:
+    app: user-service
+  clusterIP: 10.233.34.160
+  clusterIPs:
+    - 10.233.34.160
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

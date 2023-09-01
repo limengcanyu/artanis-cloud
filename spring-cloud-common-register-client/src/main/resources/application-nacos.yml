@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    nacos:
+      # 启动配置管理
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+      #        namespace: eef6131d-3557-4ed5-b39c-cddc0d256d08
+      # 启动服务发现
+      discovery:
+        server-addr: 127.0.0.1:8848
+

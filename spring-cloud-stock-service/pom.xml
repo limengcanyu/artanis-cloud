@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.spring.cloud.alice</groupId>
+		<artifactId>spring-cloud-alice</artifactId>
+		<version>0.0.1</version>
+	</parent>
+
+	<groupId>com.spring.cloud.stock.service</groupId>
+	<artifactId>spring-cloud-stock-service</artifactId>
+	<name>spring-cloud-stock-service</name>
+	<description>spring-cloud-stock-service project</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.spring.cloud.common</groupId>
+			<artifactId>spring-cloud-common</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.spring.cloud.common.register.client</groupId>
+			<artifactId>spring-cloud-common-register-client</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.spring.cloud.common.seata</groupId>
+			<artifactId>spring-cloud-common-seata</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.spring.cloud.common.mybatis.plus</groupId>
+			<artifactId>spring-cloud-common-mybatis-plus</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.spring.cloud.common.seata</groupId>
+			<artifactId>spring-cloud-common-seata</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+	</dependencies>
+
+</project>

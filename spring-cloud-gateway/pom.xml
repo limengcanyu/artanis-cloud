@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.spring.cloud.alice</groupId>
+		<artifactId>spring-cloud-alice</artifactId>
+		<version>0.0.1</version>
+	</parent>
+
+	<groupId>com.spring.cloud.gateway</groupId>
+	<artifactId>spring-cloud-gateway</artifactId>
+	<name>spring-cloud-gateway</name>
+	<description>spring-cloud-gateway project</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.spring.cloud.common.register.client</groupId>
+			<artifactId>spring-cloud-common-register-client</artifactId>
+			<version>0.0.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.spring.cloud.common</groupId>
+			<artifactId>spring-cloud-common</artifactId>
+			<version>0.0.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-web</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- 使用 Spring Cloud Alibaba Sentinel 时配置 start -->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+		</dependency>
+		<!-- 使用 Spring Cloud Alibaba Sentinel 时配置 end -->
+
+		<!-- 接入 Sentinel 控制台 start -->
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-transport-simple-http</artifactId>
+			<version>1.8.6</version>
+		</dependency>
+		<!-- 接入 Sentinel 控制台 end -->
+
+		<!-- 采用 Nacos 作为规则配置数据源 -->
+		<!-- https://mvnrepository.com/artifact/com.alibaba.csp/sentinel-datasource-nacos -->
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-datasource-nacos</artifactId>
+			<version>1.8.6</version>
+		</dependency>
+	</dependencies>
+
+</project>

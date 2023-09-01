@@ -1,0 +1,28 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: gateway-service
+  namespace: default
+  labels:
+    app: gateway-service
+  annotations:
+    kubesphere.io/creator: admin
+spec:
+  ports:
+    - name: http-8091
+      protocol: TCP
+      port: 8091
+      targetPort: 8091
+      nodePort: 30866
+  selector:
+    app: gateway-service
+  clusterIP: 10.233.7.211
+  clusterIPs:
+    - 10.233.7.211
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

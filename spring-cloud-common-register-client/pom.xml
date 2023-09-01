@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.spring.cloud.alice</groupId>
+        <artifactId>spring-cloud-alice</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <groupId>com.spring.cloud.common.register.client</groupId>
+    <artifactId>spring-cloud-common-register-client</artifactId>
+    <name>spring-cloud-common-register-client</name>
+    <description>spring-cloud-common-register-client project</description>
+
+    <dependencies>
+        <!-- Eureka client configuration start -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!-- Eureka client configuration start -->
+
+        <!-- Nacos client configuration start -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+        <!--            <version>2021.1</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+        <!--            <version>2021.1</version>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-loadbalancer</artifactId>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>-->
+        <!--        </dependency>-->
+        <!-- Nacos client configuration end -->
+
+        <!-- Consul start -->
+        <!--		<dependency>-->
+        <!--			<groupId>org.springframework.cloud</groupId>-->
+        <!--			<artifactId>spring-cloud-starter-consul-discovery</artifactId>-->
+        <!--		</dependency>-->
+        <!-- Consul start -->
+
+        <!-- zookeeper start -->
+        <!--		<dependency>-->
+        <!--			<groupId>org.springframework.cloud</groupId>-->
+        <!--			<artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>-->
+        <!--		</dependency>-->
+        <!-- zookeeper end -->
+    </dependencies>
+
+</project>

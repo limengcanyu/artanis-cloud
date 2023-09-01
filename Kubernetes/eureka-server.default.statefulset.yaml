@@ -1,0 +1,68 @@
+﻿kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: eureka-server
+  namespace: default
+  labels:
+    app: eureka-server
+  annotations:
+    kubesphere.io/creator: admin
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: eureka-server
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: eureka-server
+      annotations:
+        kubesphere.io/restartedAt: '2022-07-08T01:39:41.716Z'
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: eureka-config
+            items:
+              - key: application.yml
+                path: application.yml
+              - key: application-common.yml
+                path: application-common.yml
+              - key: application-dev.yml
+                path: application-dev.yml
+              - key: application-k8s.yml
+                path: application-k8s.yml
+            defaultMode: 420
+      containers:
+        - name: container-86q6vy
+          image: 'limengcanyu/spring-cloud-eureka-server:0.0.1-SNAPSHOT'
+          ports:
+            - name: http-8761
+              containerPort: 8761
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 200Mi
+          volumeMounts:
+            - name: config
+              readOnly: true
+              mountPath: /config
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      securityContext: {}
+      schedulerName: default-scheduler
+  serviceName: eureka-server-headless
+  podManagementPolicy: OrderedReady
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+  revisionHistoryLimit: 10

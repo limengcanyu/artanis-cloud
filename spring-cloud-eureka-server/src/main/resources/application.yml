@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-cloud-eureka-server
+  profiles:
+    active: eureka-server
+#    include: eureka-server # 优先级比active高
+#    active: k8s

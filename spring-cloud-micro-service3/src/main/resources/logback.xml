@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod=" 5 seconds">
+    <!-- include spring boot default -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+
+    <!-- TLog 日志 -->
+    <property name="APP_NAME" value="spring-cloud-micro-service3"/>
+    <property name="LOG_HOME" value="./logs"/>
+
+    <!-- 增加如下的TLog MDC Listener -->
+    <contextListener class="com.yomahub.tlog.core.enhance.logback.TLogLogbackTTLMdcListener"/>
+
+    <!--控制台日志-->
+    <appender name="tlog-console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>TLog CONSOLE %d{yyyy-MM-dd HH:mm:ss.SSS} %X{tl} [%thread] %-5level %logger{50}: %line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--文件日志-->
+    <!--同步日志-->
+    <appender name="tlog-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/${APP_NAME}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/logback-rolling-mdc.log.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+            <!--日志文件大小-->
+            <maxFileSize>1000MB</maxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>TLog FILE %d{yyyy-MM-dd HH:mm:ss.SSS} %X{tl} [%thread] %-5level %logger{50} %line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- SkyWalking 日志 -->
+    <appender name="skywalking-console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+                <Pattern>SkyWalking CONSOLE %d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36}: %line -%msg%n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="skywalking-grpc" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout">
+                <Pattern>SkyWalking GRPC %d{yyyy-MM-dd HH:mm:ss.SSS} [%X{tid}] [%thread] %-5level %logger{36} %line -%msg%n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="skywalking-file" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_HOME}/${APP_NAME}-skywalking.log</file>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <Pattern>SkyWalking FILE [%sw_ctx] [%level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %logger:%line - %msg%n</Pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="tlog-console"/>
+        <!--        <appender-ref ref="tlog-file"/>-->
+
+        <!--        <appender-ref ref="skywalking-console"/>-->
+        <!--        <appender-ref ref="skywalking-grpc"/>-->
+        <!--        <appender-ref ref="skywalking-file"/>-->
+    </root>
+
+</configuration>

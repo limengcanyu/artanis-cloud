@@ -1,0 +1,5 @@
+# 在每个应用中添加如下配置，用于 Grafana JVM (Micrometer)
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}

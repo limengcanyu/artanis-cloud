@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: spring-cloud-user-service
+  profiles:
+    active: common,dev,zookeeper
+
+logging:
+  file:
+    name: /var/log/spring-cloud-user-service

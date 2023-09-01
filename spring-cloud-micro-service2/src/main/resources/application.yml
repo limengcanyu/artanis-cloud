@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: common,eureka-client,instance1
+  application:
+    name: spring-cloud-micro-service2
+
+logging:
+  file:
+    name: /var/log/spring-cloud-micro-service2
