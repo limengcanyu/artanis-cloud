@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: kafka
+
+logging:
+  level:
+    com.spring.cloud: DEBUG
+

@@ -1,0 +1,62 @@
+logging:
+  pattern:
+    console: "${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"
+    file: "${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"
+  level:
+    com.spring.cloud: DEBUG
+  file:
+    name: /var/log/spring-cloud-knife4j-aggregation
+
+server:
+  port: 8061
+
+eureka:
+  instance:
+    hostname: localhost
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      startup: ${random.int}    # needed to trigger info and endpoint update after restart
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+spring:
+  application:
+    name: spring-cloud-knife4j-aggregation # spring cloud gateway 使用此名称查找注册中心服务 Exception: No servers available for service: spring-cloud-micro-service1
+#  rabbitmq:
+#    addresses: "amqp://admin:secret@localhost"
+#    template:
+#      retry:
+#        enabled: true
+#        initial-interval: "2s"
+
+knife4j:
+  enableAggregation: true
+  eureka:
+    enable: true
+    serviceUrl: http://localhost:8761/eureka/
+    routes:
+      - name: 订单服务
+        serviceName: spring-cloud-order-service
+        location: /v2/api-docs?group=default
+        servicePath: /order
+      - name: 用户服务
+        serviceName: spring-cloud-user-service
+        location: /aub/v2/api-docs?group=default
+        servicePath: /user
+

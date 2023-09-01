@@ -1,0 +1,90 @@
+### service1 ###########################################################################################################
+### Send POST request with json body
+POST http://localhost:8081/getMap
+Content-Type: application/json
+sign: xfs9sdf789sdxfds987f
+token: eyJhbGciOiJSUzUxMiJ9.eyJ0ZW5hbnRJZCI6IlQwMDAwMDEiLCJjb21wYW55SWQiOiJDMDAwMDAxIiwidXNlcklkIjoiVTAwMDAwMSIsImxvZ2luVVVJRCI6ImY5MWI2NzgxNWVkNzQyYTA4ZGRhZTgyYmI4NWMyZDRhIn0.DezXUkRX-xCrnYF4_Plc2s1Dl17v_aWI_XDgiG1iMav4obhZZC4uUuG1UxyYxYjH76q-6rUnhGlFYcdRPymcuSwFnN8b6WFD0iwSo8ZLNux-EaHSrJTBDXDcpXSOMGWa5gmbyrOFoOi5k_4ScpPj24I-Df4UC2L_C0-H5bex1T3oHjweCTLz6JrHYg-e99CcINDX4EW5TADqLt5mngjnm-NrFcAA8o-t6STaNQmmpFvzq1hjH9GRrQ1q98avOQoKrfmJBCL3imr-k7ANdTtIkMxjTZEifE1l9eyw_7saor1sFrEv7k8RCx0eihf0vVLezEbMHZQ7PfQ4XCxk5vVK5E0m11P1gvLb3v44gV_rhpf3U3ziLCkGLRyThlP6kzZ_kB4ACUDlDNk2zEGkfMjOatdqJuWU7kWwG2CGc6R-VHUK13ZhyR1HuQ76cm76_HxCgPojZbgteanycGCOII9361HGaJO2XQajwYyUC7KU-MELXPLfxJ04rq8Ze03pGsd5ExpeI4fFpbE2NPWSEV2d1p8s18bW5e3ZHG9JmEm33M4iiAYvlEaTMHqx9HtiiOUyVH7HHDTSF8gHcH_fjChvmPpEB-ip6mH23FETAEaY_mb9bVtbyue_ipBALnbVmQcMdrJO3ptjC6f5DbJQNUj78is_QANWSnoyofgfL__ro3Q
+
+{
+  "id": 999,
+  "value": "content"
+}
+
+
+### Send POST request with json body
+POST http://localhost:8081/getStores
+Content-Type: application/json
+sign: xfs9sdf789sdxfds987f
+token: eyJhbGciOiJSUzUxMiJ9.eyJ0ZW5hbnRJZCI6IlQwMDAwMDEiLCJjb21wYW55SWQiOiJDMDAwMDAxIiwidXNlcklkIjoiVTAwMDAwMSIsImxvZ2luVVVJRCI6ImY5MWI2NzgxNWVkNzQyYTA4ZGRhZTgyYmI4NWMyZDRhIn0.DezXUkRX-xCrnYF4_Plc2s1Dl17v_aWI_XDgiG1iMav4obhZZC4uUuG1UxyYxYjH76q-6rUnhGlFYcdRPymcuSwFnN8b6WFD0iwSo8ZLNux-EaHSrJTBDXDcpXSOMGWa5gmbyrOFoOi5k_4ScpPj24I-Df4UC2L_C0-H5bex1T3oHjweCTLz6JrHYg-e99CcINDX4EW5TADqLt5mngjnm-NrFcAA8o-t6STaNQmmpFvzq1hjH9GRrQ1q98avOQoKrfmJBCL3imr-k7ANdTtIkMxjTZEifE1l9eyw_7saor1sFrEv7k8RCx0eihf0vVLezEbMHZQ7PfQ4XCxk5vVK5E0m11P1gvLb3v44gV_rhpf3U3ziLCkGLRyThlP6kzZ_kB4ACUDlDNk2zEGkfMjOatdqJuWU7kWwG2CGc6R-VHUK13ZhyR1HuQ76cm76_HxCgPojZbgteanycGCOII9361HGaJO2XQajwYyUC7KU-MELXPLfxJ04rq8Ze03pGsd5ExpeI4fFpbE2NPWSEV2d1p8s18bW5e3ZHG9JmEm33M4iiAYvlEaTMHqx9HtiiOUyVH7HHDTSF8gHcH_fjChvmPpEB-ip6mH23FETAEaY_mb9bVtbyue_ipBALnbVmQcMdrJO3ptjC6f5DbJQNUj78is_QANWSnoyofgfL__ro3Q
+
+{
+  "id": 999,
+  "value": "content"
+}
+
+
+### gateway ###########################################################################################################
+### Send POST request with json body
+POST http://localhost:8091/service1/getName
+Content-Type: application/json
+sign: xfs9sdf789sdxfds987f
+token: eyJhbGciOiJSUzUxMiJ9.eyJ0ZW5hbnRJZCI6IlQwMDAwMDEiLCJjb21wYW55SWQiOiJDMDAwMDAxIiwidXNlcklkIjoiVTAwMDAwMSIsImxvZ2luVVVJRCI6ImY5MWI2NzgxNWVkNzQyYTA4ZGRhZTgyYmI4NWMyZDRhIn0.DezXUkRX-xCrnYF4_Plc2s1Dl17v_aWI_XDgiG1iMav4obhZZC4uUuG1UxyYxYjH76q-6rUnhGlFYcdRPymcuSwFnN8b6WFD0iwSo8ZLNux-EaHSrJTBDXDcpXSOMGWa5gmbyrOFoOi5k_4ScpPj24I-Df4UC2L_C0-H5bex1T3oHjweCTLz6JrHYg-e99CcINDX4EW5TADqLt5mngjnm-NrFcAA8o-t6STaNQmmpFvzq1hjH9GRrQ1q98avOQoKrfmJBCL3imr-k7ANdTtIkMxjTZEifE1l9eyw_7saor1sFrEv7k8RCx0eihf0vVLezEbMHZQ7PfQ4XCxk5vVK5E0m11P1gvLb3v44gV_rhpf3U3ziLCkGLRyThlP6kzZ_kB4ACUDlDNk2zEGkfMjOatdqJuWU7kWwG2CGc6R-VHUK13ZhyR1HuQ76cm76_HxCgPojZbgteanycGCOII9361HGaJO2XQajwYyUC7KU-MELXPLfxJ04rq8Ze03pGsd5ExpeI4fFpbE2NPWSEV2d1p8s18bW5e3ZHG9JmEm33M4iiAYvlEaTMHqx9HtiiOUyVH7HHDTSF8gHcH_fjChvmPpEB-ip6mH23FETAEaY_mb9bVtbyue_ipBALnbVmQcMdrJO3ptjC6f5DbJQNUj78is_QANWSnoyofgfL__ro3Q
+verifySign: true
+
+{}
+
+
+### Send POST request with json body
+GET http://192.168.66.131:30638/service1/getName
+Accept: application/json
+
+
+### Send POST request with json body
+POST http://localhost:8091/service1/getMap
+Content-Type: application/json
+sign: xfs9sdf789sdxfds987f
+token: eyJhbGciOiJSUzUxMiJ9.eyJ0ZW5hbnRJZCI6IlQwMDAwMDEiLCJjb21wYW55SWQiOiJDMDAwMDAxIiwidXNlcklkIjoiVTAwMDAwMSIsImxvZ2luVVVJRCI6ImY5MWI2NzgxNWVkNzQyYTA4ZGRhZTgyYmI4NWMyZDRhIn0.DezXUkRX-xCrnYF4_Plc2s1Dl17v_aWI_XDgiG1iMav4obhZZC4uUuG1UxyYxYjH76q-6rUnhGlFYcdRPymcuSwFnN8b6WFD0iwSo8ZLNux-EaHSrJTBDXDcpXSOMGWa5gmbyrOFoOi5k_4ScpPj24I-Df4UC2L_C0-H5bex1T3oHjweCTLz6JrHYg-e99CcINDX4EW5TADqLt5mngjnm-NrFcAA8o-t6STaNQmmpFvzq1hjH9GRrQ1q98avOQoKrfmJBCL3imr-k7ANdTtIkMxjTZEifE1l9eyw_7saor1sFrEv7k8RCx0eihf0vVLezEbMHZQ7PfQ4XCxk5vVK5E0m11P1gvLb3v44gV_rhpf3U3ziLCkGLRyThlP6kzZ_kB4ACUDlDNk2zEGkfMjOatdqJuWU7kWwG2CGc6R-VHUK13ZhyR1HuQ76cm76_HxCgPojZbgteanycGCOII9361HGaJO2XQajwYyUC7KU-MELXPLfxJ04rq8Ze03pGsd5ExpeI4fFpbE2NPWSEV2d1p8s18bW5e3ZHG9JmEm33M4iiAYvlEaTMHqx9HtiiOUyVH7HHDTSF8gHcH_fjChvmPpEB-ip6mH23FETAEaY_mb9bVtbyue_ipBALnbVmQcMdrJO3ptjC6f5DbJQNUj78is_QANWSnoyofgfL__ro3Q
+verifySign: true
+
+{
+  "id": 999,
+  "value": "content",
+  "name": "紫阳真人"
+}
+
+
+### Send POST request with json body
+POST http://localhost:8091/service1/getStores
+Content-Type: application/json
+sign: xfs9sdf789sdxfds987f
+token: eyJhbGciOiJSUzUxMiJ9.eyJ0ZW5hbnRJZCI6IlQwMDAwMDEiLCJjb21wYW55SWQiOiJDMDAwMDAxIiwidXNlcklkIjoiVTAwMDAwMSIsImxvZ2luVVVJRCI6ImY5MWI2NzgxNWVkNzQyYTA4ZGRhZTgyYmI4NWMyZDRhIn0.DezXUkRX-xCrnYF4_Plc2s1Dl17v_aWI_XDgiG1iMav4obhZZC4uUuG1UxyYxYjH76q-6rUnhGlFYcdRPymcuSwFnN8b6WFD0iwSo8ZLNux-EaHSrJTBDXDcpXSOMGWa5gmbyrOFoOi5k_4ScpPj24I-Df4UC2L_C0-H5bex1T3oHjweCTLz6JrHYg-e99CcINDX4EW5TADqLt5mngjnm-NrFcAA8o-t6STaNQmmpFvzq1hjH9GRrQ1q98avOQoKrfmJBCL3imr-k7ANdTtIkMxjTZEifE1l9eyw_7saor1sFrEv7k8RCx0eihf0vVLezEbMHZQ7PfQ4XCxk5vVK5E0m11P1gvLb3v44gV_rhpf3U3ziLCkGLRyThlP6kzZ_kB4ACUDlDNk2zEGkfMjOatdqJuWU7kWwG2CGc6R-VHUK13ZhyR1HuQ76cm76_HxCgPojZbgteanycGCOII9361HGaJO2XQajwYyUC7KU-MELXPLfxJ04rq8Ze03pGsd5ExpeI4fFpbE2NPWSEV2d1p8s18bW5e3ZHG9JmEm33M4iiAYvlEaTMHqx9HtiiOUyVH7HHDTSF8gHcH_fjChvmPpEB-ip6mH23FETAEaY_mb9bVtbyue_ipBALnbVmQcMdrJO3ptjC6f5DbJQNUj78is_QANWSnoyofgfL__ro3Q
+
+{
+  "id": 999,
+  "value": "content"
+}
+
+### spring-cloud-alert-service ###########################################################################################################
+### alertByGrafana
+POST http://localhost:8085/alertByGrafana
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}
+
+### alertByAlertmanager
+POST http://localhost:8085/alertByAlertmanager
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}
+
+### prometheus reload any configured rule files ###########################################################################################################
+POST http://192.168.242.128:9090/-/reload
+Content-Type: application/json
+
+{}

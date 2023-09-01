@@ -1,0 +1,16 @@
+spring:
+  kafka:
+    # 单机
+#    bootstrap-servers: "localhost:9092"
+    # 集群
+    bootstrap-servers: "localhost:9093,localhost:9094,localhost:9095"
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+      max-poll-records: 20000
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all

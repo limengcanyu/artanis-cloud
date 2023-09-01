@@ -1,0 +1,28 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: eureka-server
+  namespace: default
+  labels:
+    app: eureka-server
+  annotations:
+    kubesphere.io/creator: admin
+spec:
+  ports:
+    - name: http-8761
+      protocol: TCP
+      port: 8761
+      targetPort: 8761
+      nodePort: 30987
+  selector:
+    app: eureka-server
+  clusterIP: 10.233.39.140
+  clusterIPs:
+    - 10.233.39.140
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

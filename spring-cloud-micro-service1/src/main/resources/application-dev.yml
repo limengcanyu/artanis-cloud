@@ -1,0 +1,63 @@
+logging:
+  pattern:
+    console: "${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"
+    file: "${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"
+  level:
+    com.spring.cloud: DEBUG
+  file:
+    name: /var/log/spring-cloud-micro-service1
+
+server:
+  port: 8081
+
+# register using eureka
+eureka:
+  instance:
+    hostname: localhost
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      startup: ${random.int}    # needed to trigger info and endpoint update after restart
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    healthcheck:
+      enabled: true
+    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://172.17.0.2:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+    shutdown:
+      enabled: true
+
+spring:
+  application:
+    name: spring-cloud-micro-service1 # spring cloud gateway 使用此名称查找注册中心服务 Exception: No servers available for service: spring-cloud-micro-service1
+#  redis:
+#    host: 192.168.66.128
+#    port: 6379
+#  rabbitmq:
+#    addresses: "amqp://admin:secret@localhost"
+#    template:
+#      retry:
+#        enabled: true
+#        initial-interval: "2s"
+  cloud:
+    # register using nacos
+    nacos:
+      # 启动配置管理
+      config:
+        server-addr: 127.0.0.1:8848
+      # 启动服务发现
+      discovery:
+        server-addr: 127.0.0.1:8848
+

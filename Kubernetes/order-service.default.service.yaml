@@ -1,0 +1,28 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: order-service
+  namespace: default
+  labels:
+    app: order-service
+  annotations:
+    kubesphere.io/creator: admin
+spec:
+  ports:
+    - name: http-8082
+      protocol: TCP
+      port: 8082
+      targetPort: 8082
+      nodePort: 31742
+  selector:
+    app: order-service
+  clusterIP: 10.233.5.56
+  clusterIPs:
+    - 10.233.5.56
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

@@ -1,0 +1,26 @@
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    #    url: jdbc:h2:mem:test # 创建一个名叫 test 的内存数据库，应用重启就没了
+    url: mpw:xeI4XIc8vudGFJWcCAPre40iV/S0TRTXb+K5HZ9dQr0= # 创建一个名叫 test 的内存数据库，应用重启就没了
+#    url: jdbc:h2:~/test # 在系统的home目录下创建一个名叫 test 的持久数据库
+#    username: root
+#    password: test
+    username: mpw:HegYHKBKNLXMbcND4mBNmw==
+    password: mpw:lALIx8hGq5t82wvybeo8Rw==
+  h2: # 开启web控制台 访问地址 http://localhost:应用端口/h2-database   http://localhost/h2-database
+    console:
+      enabled: true # Whether to enable the console 是否启用控制台
+      path: /h2-database # Path at which the console is available. 控制台可用路径
+      settings:
+        web-allow-others: true
+  sql:
+    init:
+      schema-locations: classpath:db/schema-h2.sql
+      data-locations: classpath:db/data-h2.sql
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 让mybatis-plus打印sql
+  mapper-locations: classpath:/mapper/*Mapper.xml

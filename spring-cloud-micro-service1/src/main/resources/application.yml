@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: eureka
+  application:
+    name: spring-cloud-micro-service1
+
+server:
+  port: 8081
+
+tlog:
+  enable-invoke-time-print: true
+  pattern: "[$preApp][$preIp][$traceId][$spanId]"

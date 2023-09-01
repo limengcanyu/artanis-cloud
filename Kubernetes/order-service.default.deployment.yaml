@@ -1,0 +1,72 @@
+﻿kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: order-service
+  namespace: default
+  labels:
+    app: order-service
+  annotations:
+    deployment.kubernetes.io/revision: '4'
+    kubesphere.io/creator: admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: order-service
+      annotations:
+        kubesphere.io/restartedAt: '2022-07-08T05:57:16.980Z'
+    spec:
+      volumes:
+        - name: config
+          configMap:
+            name: order-config
+            items:
+              - key: application.yml
+                path: application.yml
+              - key: application-common.yml
+                path: application-common.yml
+              - key: application-dev.yml
+                path: application-dev.yml
+              - key: application-k8s.yml
+                path: application-k8s.yml
+            defaultMode: 420
+      containers:
+        - name: container-qwjs4b
+          image: 'limengcanyu/spring-cloud-order-service:0.0.1-SNAPSHOT'
+          ports:
+            - name: http-8082
+              containerPort: 8082
+              protocol: TCP
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: '-Dspring.profiles.active=common,k8s'
+          resources:
+            limits:
+              cpu: 500m
+              memory: 200Mi
+          volumeMounts:
+            - name: config
+              readOnly: true
+              mountPath: /config
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

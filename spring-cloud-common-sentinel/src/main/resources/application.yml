@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    com.spring.cloud: debug
+
+spring:
+  application:
+    name: spring-cloud-common-sentinel
+  cloud:
+    sentinel:
+      transport:
+        port: 8719 # 启动一个 Http Server，与 Sentinel 控制台做交互
+        dashboard: localhost:8000
+      eager: true # 应用启动之后就发送心跳给Sentinel Dashboard，而不是等有流量才发送
+
+feign:
+  sentinel:
+    enabled: true

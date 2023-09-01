@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: spring-cloud-common-rocketmq
+
+logging:
+  level:
+    com.spring.cloud: DEBUG
+
+rocketmq:
+  name-server: localhost:9876
+  consumer:
+    topic: user-topic
+    group: my-group
+  producer:
+    group: my-group
+    send-message-timeout: 300000
+
+#demo.rocketmq.myNameServer: 127.0.0.1:9876
+#demo.rocketmq.topic.user: user-topic
+

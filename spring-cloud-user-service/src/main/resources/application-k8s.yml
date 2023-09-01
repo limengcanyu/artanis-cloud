@@ -1,0 +1,66 @@
+server:
+  port: 8083
+
+spring:
+  cloud:
+    nacos:
+      # 启动配置管理
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+      #        namespace: eef6131d-3557-4ed5-b39c-cddc0d256d08
+      # 启动服务发现
+      discovery:
+        server-addr: 127.0.0.1:8848
+    consul:
+      host: 192.168.136.135
+      port: 8508
+      # HTTP Health Check
+      discovery:
+        healthCheckPath: ${management.server.servlet.context-path}/actuator/health
+        healthCheckInterval: 15s
+        # Making the Consul Instance ID Unique
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
+      datasource:
+        ds:
+          nacos:
+            server-addr: localhost:8848
+            group-id: public
+            data-id: spring-cloud-user-service-dev.yml
+            data-type: json
+            rule-type: flow
+  # using the metadata
+  boot:
+    admin:
+      client:
+        instance:
+          metadata:
+            tags:
+              environment: dev111
+
+# using the info endpoint
+info:
+  tags:
+    environment: dev111
+
+# register using eureka
+eureka:
+  instance:
+    hostname: localhost
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      startup: ${random.int} # needed to trigger info and endpoint update after restart
+    prefer-ip-address: true # 解决docker中feign调用出现连接拒绝
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://eureka-server-0.eureka-server-headless.default.svc.cluster.local:8761/eureka,http://eureka-server-1.eureka-server-headless.default.svc.cluster.local:8761/eureka,http://eureka-server-2.eureka-server-headless.default.svc.cluster.local:8761/eureka

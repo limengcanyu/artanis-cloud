@@ -1,0 +1,10 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.spring.cloud.common.advice.ResponseControllerAdvice,\
+com.spring.cloud.common.config.ThreadPoolConfiguration,\
+com.spring.cloud.common.filter.SecurityFilter,\
+com.spring.cloud.common.interceptor.FeignRequestInterceptor,\
+com.spring.cloud.common.controller.SampleController
+
+
+#com.spring.cloud.common.config.WebMvcConfig,
+#com.spring.cloud.common.interceptor.SecurityInterceptor

@@ -1,0 +1,186 @@
+﻿kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: user-config
+  namespace: default
+  annotations:
+    kubesphere.io/creator: admin
+data:
+  application-common.yml: |+
+    spring:
+      application:
+        name: spring-cloud-user-service
+
+    logging:
+      pattern:
+        console: "${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"
+        file: "${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"
+      level:
+        com.spring.cloud: DEBUG
+      file:
+        name: /var/log/spring-cloud-user-service
+
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: "*"
+      endpoint:
+        health:
+          show-details: ALWAYS
+        shutdown:
+          enabled: true
+      metrics:
+        tags:
+          application: ${spring.application.name}
+
+    feign:
+      client:
+        config:
+          default: # 对所有服务的feign调用有效
+            requestInterceptors:
+              - com.spring.cloud.common.interceptor.FeignRequestInterceptor
+    #      spring-cloud-order-service: # 针对特定服务的feign调用有效
+    #        requestInterceptors:
+    #          - com.spring.cloud.common.interceptor.FeignRequestInterceptor
+
+  application-dev.yml: |
+    server:
+      port: 8083
+
+    spring:
+      cloud:
+        nacos:
+          # 启动配置管理
+          config:
+            server-addr: 127.0.0.1:8848
+            file-extension: yml
+          #        namespace: eef6131d-3557-4ed5-b39c-cddc0d256d08
+          # 启动服务发现
+          discovery:
+            server-addr: 127.0.0.1:8848
+        consul:
+          host: 192.168.136.135
+          port: 8508
+          # HTTP Health Check
+          discovery:
+            healthCheckPath: ${management.server.servlet.context-path}/actuator/health
+            healthCheckInterval: 15s
+            # Making the Consul Instance ID Unique
+            instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        sentinel:
+          transport:
+            port: 8719
+            dashboard: localhost:8080
+          datasource:
+            ds:
+              nacos:
+                server-addr: localhost:8848
+                group-id: public
+                data-id: spring-cloud-user-service-dev.yml
+                data-type: json
+                rule-type: flow
+      profiles:
+        active: dev
+      # using the metadata
+      boot:
+        admin:
+          client:
+            instance:
+              metadata:
+                tags:
+                  environment: dev111
+
+    # using the info endpoint
+    info:
+      tags:
+        environment: dev111
+
+    # register using eureka
+    eureka:
+      instance:
+        hostname: localhost
+        leaseRenewalIntervalInSeconds: 10
+        health-check-url-path: /actuator/health
+        metadata-map:
+          startup: ${random.int} # needed to trigger info and endpoint update after restart
+        prefer-ip-address: true # 解决docker中feign调用出现连接拒绝
+      client:
+        registerWithEureka: true
+        fetchRegistry: true
+        registryFetchIntervalSeconds: 5
+        healthcheck:
+          enabled: true
+        serviceUrl:
+          defaultZone: http://localhost:8761/eureka/
+  application-k8s.yml: |
+    server:
+      port: 8083
+
+    spring:
+      cloud:
+        nacos:
+          # 启动配置管理
+          config:
+            server-addr: 127.0.0.1:8848
+            file-extension: yml
+          #        namespace: eef6131d-3557-4ed5-b39c-cddc0d256d08
+          # 启动服务发现
+          discovery:
+            server-addr: 127.0.0.1:8848
+        consul:
+          host: 192.168.136.135
+          port: 8508
+          # HTTP Health Check
+          discovery:
+            healthCheckPath: ${management.server.servlet.context-path}/actuator/health
+            healthCheckInterval: 15s
+            # Making the Consul Instance ID Unique
+            instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        sentinel:
+          transport:
+            port: 8719
+            dashboard: localhost:8080
+          datasource:
+            ds:
+              nacos:
+                server-addr: localhost:8848
+                group-id: public
+                data-id: spring-cloud-user-service-dev.yml
+                data-type: json
+                rule-type: flow
+      # using the metadata
+      boot:
+        admin:
+          client:
+            instance:
+              metadata:
+                tags:
+                  environment: dev111
+
+    # using the info endpoint
+    info:
+      tags:
+        environment: dev111
+
+    # register using eureka
+    eureka:
+      instance:
+        hostname: localhost
+        leaseRenewalIntervalInSeconds: 10
+        health-check-url-path: /actuator/health
+        metadata-map:
+          startup: ${random.int} # needed to trigger info and endpoint update after restart
+        prefer-ip-address: false
+      client:
+        registerWithEureka: true
+        fetchRegistry: true
+        registryFetchIntervalSeconds: 5
+        healthcheck:
+          enabled: true
+        serviceUrl:
+          defaultZone: http://eureka-server-0.eureka-server-headless.default.svc.cluster.local:8761/eureka,http://eureka-server-1.eureka-server-headless.default.svc.cluster.local:8761/eureka,http://eureka-server-2.eureka-server-headless.default.svc.cluster.local:8761/eureka
+  application.yml: |
+    spring:
+      profiles:
+        active: common,k8s

@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: common,dev
+#    include: common,dev # 优先级比active高
+#    active: k8s

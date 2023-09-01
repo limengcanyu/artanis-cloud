@@ -1,0 +1,7 @@
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#com.spring.cloud.common.interceptor.FeignAuthInterceptor,
+#com.spring.cloud.common.config.WebMvcConfig
+
+#com.spring.cloud.common.interceptor.FeignRequestInterceptor
+
+#com.spring.cloud.common.controller.SampleController
