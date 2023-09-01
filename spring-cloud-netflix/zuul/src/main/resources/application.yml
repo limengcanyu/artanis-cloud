@@ -1,0 +1,39 @@
+spring.application.name: zuul
+
+server.port: 8791
+
+eureka.client.registerWithEureka: true
+eureka.client.fetchRegistry: true
+eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+
+# Embedded Zuul Reverse Proxy
+zuul.ignoredServices: '*'
+zuul.routes.eureka-client1: /client1/**
+zuul.routes.eureka-client2: /client2/**
+
+# Enabling Endpoints
+management.endpoints.web.exposure.include: "*"
+
+# Routes Endpoint
+# http://localhost:8791/actuator/routes
+# Filters Endpoint
+# http://localhost:8791/actuator/filters
+
+# Uploading Files through Zuul
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 126000
+ribbon.ConnectTimeout: 3000
+ribbon.ReadTimeout: 60000
+
+# Query String Encoding
+zuul.forceOriginalQueryStringEncoding: true
+
+# Disable Zuul Filters
+zuul.*Filter.pre.disable: true
+zuul.*Filter.post.disable: true
+zuul.*Filter.error.disable: true
+
+# LOGGING
+logging.level.root: WARN
+logging.level.org.springframework.web: DEBUG
+logging.level.com.zuul: DEBUG
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}

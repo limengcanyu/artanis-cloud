@@ -1,0 +1,11 @@
+spring.application.name: eureka-client1
+
+eureka.client.registerWithEureka: true
+eureka.client.fetchRegistry: true
+eureka.client.serviceUrl.defaultZone: http://localhost:8761/eureka/
+
+# LOGGING
+logging.level.root: WARN
+logging.level.org.springframework.web: DEBUG
+logging.level.com.eureka.client1: DEBUG
+logging.pattern.console: ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %4line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
