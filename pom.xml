@@ -22,6 +22,8 @@
         <module>spring-cloud-admin-server</module>
         <module>spring-cloud-alert-service</module>
         <module>spring-cloud-common</module>
+        <module>spring-cloud-common</module>
+        <module>spring-cloud-common-circuitbreaker-resilience4j</module>
         <module>spring-cloud-common-elasticsearch</module>
         <module>spring-cloud-common-kafka</module>
         <module>spring-cloud-common-minio</module>

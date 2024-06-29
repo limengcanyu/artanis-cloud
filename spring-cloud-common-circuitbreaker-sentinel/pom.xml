@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.spring.cloud.alice</groupId>
+		<artifactId>spring-cloud-alice</artifactId>
+		<version>0.0.1</version>
+	</parent>
+
+	<groupId>com.spring.cloud.common.circuitbreaker.sentinel</groupId>
+	<artifactId>spring-cloud-common-circuitbreaker-sentinel</artifactId>
+	<name>spring-cloud-common-circuitbreaker.sentinel</name>
+	<description>spring-cloud-common-circuitbreaker-sentinel project</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+		</dependency>
+
+		<!-- 采用 Nacos 作为规则配置数据源 -->
+		<!-- https://mvnrepository.com/artifact/com.alibaba.csp/sentinel-datasource-nacos -->
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-datasource-nacos</artifactId>
+			<version>1.8.4</version>
+		</dependency>
+	</dependencies>
+
+</project>

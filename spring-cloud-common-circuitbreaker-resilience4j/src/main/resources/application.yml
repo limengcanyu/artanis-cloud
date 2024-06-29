@@ -1,0 +1,53 @@
+logging:
+  level:
+    com.spring.cloud.common: debug
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      # 配置滑动窗口的大小，该滑动窗口用于记录断路器关闭时的呼叫结果。
+      slidingWindowSize: 10
+      # 配置断路器计算错误率或慢速呼叫率之前所需的最小呼叫数（每个滑动窗口周期）。
+      minimumNumberOfCalls: 10
+      # 以百分比为单位配置故障率阈值。当故障率等于或大于阈值时，断路器将转换为打开并开始短路呼叫。
+      failureRateThreshold: 50
+      # 如果设置为 true，则表示 CircuitBreaker 将自动从打开状态转换为半打开状态，无需调用即可触发转换。
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      # 断路器在从打开状态转换到半打开状态之前应等待的时间。
+      waitDurationInOpenState: 5s
+      # 配置断路器半开时允许的呼叫次数。
+      permittedNumberOfCallsInHalfOpenState: 3
+
+resilience4j.retry:
+  configs:
+    default:
+      maxAttempts: 3
+      waitDuration: 3s
+
+resilience4j.bulkhead:
+  configs:
+    default:
+      maxConcurrentCalls: 10
+      maxWaitDuration: 10ms
+
+resilience4j.thread-pool-bulkhead:
+  configs:
+    default:
+      coreThreadPoolSize: 10
+      maxThreadPoolSize: 20
+      queueCapacity: 10
+
+resilience4j.ratelimiter:
+  configs:
+    default:
+      registerHealthIndicator: false
+      limitForPeriod: 10
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0
+      eventConsumerBufferSize: 100
+
+resilience4j.timelimiter:
+  configs:
+    default:
+      cancelRunningFuture: false
+      timeoutDuration: 2s
