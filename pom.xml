@@ -24,6 +24,7 @@
         <module>spring-cloud-common</module>
         <module>spring-cloud-common</module>
         <module>spring-cloud-common-circuitbreaker-resilience4j</module>
+        <module>spring-cloud-common-circuitbreaker-sentinel</module>
         <module>spring-cloud-common-elasticsearch</module>
         <module>spring-cloud-common-kafka</module>
         <module>spring-cloud-common-minio</module>
@@ -35,7 +36,7 @@
         <module>spring-cloud-common-register-client</module>
         <module>spring-cloud-common-rocketmq</module>
         <module>spring-cloud-common-seata</module>
-        <module>spring-cloud-common-sentinel</module>
+        <module>spring-cloud-ddd-service</module>
         <module>spring-cloud-eureka-server</module>
         <module>spring-cloud-gateway</module>
         <module>spring-cloud-knife4j-aggregation</module>
