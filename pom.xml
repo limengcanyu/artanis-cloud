@@ -11,17 +11,16 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.spring.cloud.alice</groupId>
-    <artifactId>spring-cloud-alice</artifactId>
+    <groupId>org.artanis.cloud</groupId>
+    <artifactId>artanis-cloud</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
-    <name>spring-cloud-alice</name>
-    <description>spring-cloud-alice project</description>
+    <name>artanis-cloud</name>
+    <description>artanis-cloud project</description>
 
     <modules>
         <module>spring-cloud-admin-server</module>
         <module>spring-cloud-alert-service</module>
-        <module>spring-cloud-common</module>
         <module>spring-cloud-common</module>
         <module>spring-cloud-common-circuitbreaker-resilience4j</module>
         <module>spring-cloud-common-circuitbreaker-sentinel</module>

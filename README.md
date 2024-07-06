@@ -1,4 +1,4 @@
-# spring-cloud-alice
+# artanis-cloud
 
 ## spring-cloud-eureka-server
 

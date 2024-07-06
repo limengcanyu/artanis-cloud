@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.spring.cloud.alice</groupId>
-		<artifactId>spring-cloud-alice</artifactId>
+		<groupId>org.artanis.cloud</groupId>
+		<artifactId>artanis-cloud</artifactId>
 		<version>0.0.1</version>
 	</parent>
 
