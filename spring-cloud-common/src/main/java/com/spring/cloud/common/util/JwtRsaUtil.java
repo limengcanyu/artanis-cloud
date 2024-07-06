@@ -1,6 +1,5 @@
 package com.spring.cloud.common.util;
 
-import com.alibaba.fastjson2.JSON;
 import com.spring.cloud.common.constant.JwtConst;
 import com.spring.cloud.common.constant.TokenConst;
 import com.spring.cloud.common.entity.TokenEntity;
@@ -8,19 +7,17 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.impl.crypto.RsaProvider;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.Base64Utils;
 
 import java.security.KeyFactory;
-import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class JwtRsaUtil {
@@ -29,7 +26,7 @@ public class JwtRsaUtil {
      * 创建token
      */
     public static String creatToken(TokenEntity tokenEntity) {
-        Claims claims = Jwts.claims();
+        Map<String, String> claims = new HashMap<>();
         claims.put(TokenConst.TENANT_ID, tokenEntity.getTenantId());
         claims.put(TokenConst.COMPANY_ID, tokenEntity.getCompanyId());
         claims.put(TokenConst.USER_ID, tokenEntity.getUserId());
@@ -37,9 +34,9 @@ public class JwtRsaUtil {
 
         try {
             return Jwts.builder()
-                    .setSubject("Rock")
+                    .subject("Rock")
                     .signWith(JwtRsaUtil.getRSAPrivateKey(JwtConst.PRIVATE_KEY))
-                    .setClaims(claims)
+                    .claims(claims)
                     .compact();
         } catch (NoSuchAlgorithmException e) {
             log.debug("create token error: ", e);
@@ -53,11 +50,11 @@ public class JwtRsaUtil {
      */
     public static Claims parseToken(String jwsString) {
         try {
-            Jws<Claims> jws = Jwts.parserBuilder()
-                    .setSigningKey(JwtRsaUtil.getRSAPublicKey(JwtConst.PUBLIC_KEY))
+            Jws<Claims> jws = Jwts.parser()
+                    .verifyWith(JwtRsaUtil.getRSAPublicKey(JwtConst.PUBLIC_KEY))
                     .build()
-                    .parseClaimsJws(jwsString);
-            return jws.getBody();
+                    .parseSignedClaims(jwsString);
+            return jws.getPayload();
         } catch (JwtException | NoSuchAlgorithmException e) {
             log.debug("parse token error: ", e);
         }
@@ -71,7 +68,7 @@ public class JwtRsaUtil {
      * @param pubKey base64加密公钥
      */
     public static RSAPublicKey getRSAPublicKey(String pubKey) throws NoSuchAlgorithmException {
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(Base64Utils.decodeFromString(pubKey));
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(Base64.getDecoder().decode(pubKey));
         RSAPublicKey publicKey = null;
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         try {
@@ -88,7 +85,7 @@ public class JwtRsaUtil {
      * @param priKey base64加密私钥
      */
     public static RSAPrivateKey getRSAPrivateKey(String priKey) throws NoSuchAlgorithmException {
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64Utils.decodeFromString(priKey));
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(priKey));
         RSAPrivateKey privateKey = null;
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         try {
@@ -99,20 +96,20 @@ public class JwtRsaUtil {
         return privateKey;
     }
 
-    /**
-     * 生成base64加密后的公钥和私钥
-     */
-    public static void genRsaKeyPair() {
-        SecureRandom random = new SecureRandom(JwtConst.SECRET_KEY.getBytes());
-        KeyPair keyPair = RsaProvider.generateKeyPair(4096, random);
-
-        byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
-        byte[] privateKeyBytes = keyPair.getPrivate().getEncoded();
-
-        HashMap<String, String> keyMap = new HashMap<>();
-        keyMap.put("publicKey", Base64Utils.encodeToString(publicKeyBytes));
-        keyMap.put("privateKey", Base64Utils.encodeToString(privateKeyBytes));
-        log.debug("keyMap: {}", JSON.toJSONString(keyMap));
-    }
+//    /**
+//     * 生成base64加密后的公钥和私钥
+//     */
+//    public static void genRsaKeyPair() {
+//        SecureRandom random = new SecureRandom(JwtConst.SECRET_KEY.getBytes());
+//        KeyPair keyPair = RsaProvider.generateKeyPair(4096, random);
+//
+//        byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
+//        byte[] privateKeyBytes = keyPair.getPrivate().getEncoded();
+//
+//        HashMap<String, String> keyMap = new HashMap<>();
+//        keyMap.put("publicKey", Base64.getEncoder().encodeToString(publicKeyBytes));
+//        keyMap.put("privateKey", Base64.getEncoder().encodeToString(privateKeyBytes));
+//        log.debug("keyMap: {}", JSON.toJSONString(keyMap));
+//    }
 
 }
