@@ -11,12 +11,12 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>org.artanis.cloud</groupId>
-    <artifactId>artanis-cloud</artifactId>
+    <groupId>org.rock.cloud</groupId>
+    <artifactId>rock-cloud</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
-    <name>artanis-cloud</name>
-    <description>artanis-cloud project</description>
+    <name>rock-cloud</name>
+    <description>rock-cloud project</description>
 
     <modules>
         <module>spring-cloud-admin-server</module>

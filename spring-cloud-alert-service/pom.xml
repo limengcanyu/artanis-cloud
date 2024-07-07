@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.artanis.cloud</groupId>
-        <artifactId>artanis-cloud</artifactId>
+        <groupId>org.rock.cloud</groupId>
+        <artifactId>rock-cloud</artifactId>
         <version>0.0.1</version>
     </parent>
 
